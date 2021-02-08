@@ -1,0 +1,55 @@
+<!doctype html>
+
+<head>
+<style>
+  body {
+    background-color: #1abc9c !important; /* Green */
+    
+  }
+  </style>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<div class="container .bg-1">
+<h1>New York Public Library Alt Text Generator</h1>
+<h2>Select a file to upload and see the alt text</h2>
+<div style="height:50px; width:100%; clear:both;"></div>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul class=flashes>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+{% if filename %}
+	<div>
+		<img src="{{ url_for('display_image', filename=filename) }}">
+		<p>{{description}}</p>
+	</div>
+{% endif %}
+<form method="post" action="/" enctype="multipart/form-data">
+    <dl>
+		<p>
+			<input type="file" name="file" autocomplete="off" required>
+		</p>
+    </dl>
+    <p>
+		<input type="submit" value="Submit" class="btn btn-default">
+	</p>
+</form>
+<div style="height:50px; width:100%; clear:both;"></div>
+<h2> Generate Alt Text for Recently Uploaded Images</h2>
+
+<form method="post" action="/testing" enctype="multipart/form-data">
+    <p>
+		<input type="submit" value="Recent Uploads" class="btn btn-default">
+	</p>
+</form>
+</div>
