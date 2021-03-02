@@ -195,6 +195,8 @@ http://www.templatemo.com/tm-491-flat
                                             </div>
 
                                       
+					<img id="image_uploaded" src="#" alt="your image" />                                      
+
 
                                     
 
@@ -340,8 +342,26 @@ http://www.templatemo.com/tm-491-flat
         
         
         <script>
+	function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+		$('#image_uploaded').show()
+                $('#image_uploaded')
+                    .attr('src', e.target.result)
+                    .width(300)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
         $(document).ready(function (e) {
             $('#Confirmit').hide()
+	    $('#image_uploaded').hide()
+
 			$('#upload').on('click', function () {
 				var form_data = new FormData();
 				var ins = document.getElementById('multiFiles').files.length;
